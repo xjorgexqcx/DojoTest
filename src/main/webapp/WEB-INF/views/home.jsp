@@ -7,36 +7,18 @@
     <title>Tutorial: Hello Dojo!</title>
 </head>
 <body>
-    <h1 id="greeting">Hello</h1>
-    <!-- configure Dojo -->
-    <script>
-        // Instead of using data-dojo-config, we're creating a dojoConfig
-        // object *before* we load dojo.js; they're functionally identical,
-        // it's just easier to read this approach with a larger configuration.
-        var dojoConfig = {
-            async: true,
-            // This code registers the correct location of the "demo"
-            // package so we can load Dojo from the CDN whilst still
-            // being able to load local modules
-            packages: [{
-                name: "demo",
-                location: location.pathname.replace(/\/[^/]*$/, '') + '/resources/js'
-            }]
-        };
-    </script>
     <!-- load Dojo -->
-    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
-    
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"
+                data-dojo-config="async: true"> </script>
     <script>
-        require([
-            'demo/myModule'
-        ], function (myModule) {
-            myModule.setText('greeting', 'Hello Dojo!');
-
-            setTimeout(function () {
-                myModule.restoreText('greeting');
-            }, 3000);
+    require(["dojo/on", "dojo/domReady!"], function(on) {
+        on(document, "keyup", function(event) {
+            document.getElementById("keyCode").value = event.keyCode;
         });
+    });
     </script>
+    <h1>Press any key</h1>
+    keyCode value: <input type="text" id="keyCode" size="2">
+</body>
 </body>
 </html>
