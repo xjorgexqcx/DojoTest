@@ -56,7 +56,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/", method = { RequestMethod.POST,
-			RequestMethod.GET })
+			RequestMethod.GET })	
 	public String servicio() {
 		return "restTest";
 	}
