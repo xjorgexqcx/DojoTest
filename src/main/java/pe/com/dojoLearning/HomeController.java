@@ -2,11 +2,9 @@ package pe.com.dojoLearning;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pe.com.dojoLearning.beans.Persona;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -58,9 +55,14 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/index", method = { RequestMethod.POST,
+	@RequestMapping(value = "/", method = { RequestMethod.POST,
 			RequestMethod.GET })
 	public String servicio() {
+		return "restTest";
+	}
+	@RequestMapping(value = "/index", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	public String index() {
 		return "restTest";
 	}
 
@@ -72,7 +74,11 @@ public class HomeController {
 		Persona p = new Persona("Jorge", "Quijano", "SA-1");
 		List<Persona> ltaPersonas = new ArrayList<Persona>();
 		ltaPersonas.add(p);
+		
 		p = new Persona("Juan", "Juarez", "SA-1");
+		ltaPersonas.add(p);
+		
+		p = new Persona("Coco", "Quijano", "SN-2");
 		ltaPersonas.add(p);
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(ltaPersonas);

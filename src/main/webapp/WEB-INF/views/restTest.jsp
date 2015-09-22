@@ -22,5 +22,8 @@ body {
 <body>
 	<a href="servicioRest">ABRIR DENDI LEGEND</a>
 	<p id="info"></p>
+	
+	<hr/>
+	<br/>
 </body>
 </html>
