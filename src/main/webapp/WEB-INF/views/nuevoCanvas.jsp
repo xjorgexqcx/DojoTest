@@ -32,6 +32,9 @@ transparent 25%, transparent 75%, black 75%, black);
 <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
 </head>
 <body>
+<a href="listarInfo">ABRIR PAGINA DE CRUD'S</a>
+	<a href="nuevoCanvas">ABRIR PAGINA DEL NUEVO CANVAS</a>
+	<br/>
 	<canvas id="canvas" width="300" height="100"></canvas>
 	<img id="img" src="resources/sprites/sprite.png">
 	<script src="resources/js/nuevoCanvas.js"></script>	

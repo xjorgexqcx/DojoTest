@@ -8,6 +8,7 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pe.com.dojoLearning.beans.Contact;
 import pe.com.dojoLearning.beans.Persona;
+import pe.com.dojoLearning.service.ConectaService;
 
 import java.io.IOException;
 
@@ -30,6 +33,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class HomeController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
+
+	@Autowired
+	private ConectaService conectaService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -94,15 +100,50 @@ public class HomeController {
 	public String intentoDeCaptcha() {
 		return "IntentoCaptcha";
 	}
-	
+
 	@RequestMapping(value = "busqueda")
-	public String seguridad(Model model,@RequestParam("g-recaptcha-response") String captcha,@RequestParam("nombre") String nombre) {
-		 if(captcha.length()<=0){
-			 model.addAttribute("info","Lo sentimos, Verifique el captcha porfavor");
-		 }
-		 else{
-			 model.addAttribute("info","Ahora si se hizo click: "+captcha);
-		 }
+	public String seguridad(Model model,
+			@RequestParam("g-recaptcha-response") String captcha,
+			@RequestParam("nombre") String nombre) {
+		if (captcha.length() <= 0) {
+			model.addAttribute("info",
+					"Lo sentimos, Verifique el captcha porfavor");
+		} else {
+			model.addAttribute("info", "Ahora si se hizo click: " + captcha);
+		}
 		return "IntentoCaptcha";
+	}
+
+	@RequestMapping(value = "buscarInfo")
+	public String busqueda(Model model, @RequestParam("codigo") String valor) {
+		try {
+			List<Contact> rpta = conectaService.buscar(valor);
+			if (rpta.size() > 0) {
+				model.addAttribute("info", rpta);
+			} else {
+				model.addAttribute("rpta",
+						"No se encontró información");
+			}
+		} catch (NullPointerException e) {
+			List<Contact> rpta = conectaService.list();
+			if (rpta != null) {
+				model.addAttribute("info", rpta);
+			} else {
+				model.addAttribute("rpta", "No se ha recibido el dato");
+			}
+		}
+		return "busqueda";
+	}
+
+	@RequestMapping(value = "listarInfo")
+	public String listarInfo(Model model) {
+		List<Contact> rpta = conectaService.list();
+		if (rpta != null) {
+			model.addAttribute("info", rpta);
+		} else {
+			model.addAttribute("rpta",
+					"No llego a conectarse con la implementacion");
+		}
+		return "busqueda";
 	}
 }

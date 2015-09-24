@@ -20,9 +20,13 @@ body {
 </style>
 </head>
 <body>
-	<a href="servicioRest">ABRIR DENDI LEGEND</a>
+	<a href="listarInfo">ABRIR PAGINA DE CRUD'S</a>
+	<a href="nuevoCanvas">ABRIR PAGINA DEL NUEVO CANVAS</a>
+	<br/>
+	<a href="servicioRest">ABRIR DENDI LEGEND</a><br/>
+	<a href="buscarInfo">ABRIR PAGINA DE CRUD'S</a>
 	<p id="info"></p>
-	
+		
 	<hr/>
 	<br/>
 </body>

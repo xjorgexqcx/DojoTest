@@ -30,7 +30,10 @@ canvas, img {
 </script>
 </head>
 <body onload="pintadoInicial();">
-	<a href="index">ABRIR AJAX TEST CON DOJO</a>
+	<a href="index">ABRIR AJAX TEST CON DOJO</a><br/>
+	<a href="listarInfo">ABRIR PAGINA DE CRUD'S</a>
+	<a href="nuevoCanvas">ABRIR PAGINA DEL NUEVO CANVAS</a>
+	
 	<canvas id="mundo" width="506" height="439"></canvas>
 	<script src="resources/js/pintaImagenes.js"></script>
 </body>
