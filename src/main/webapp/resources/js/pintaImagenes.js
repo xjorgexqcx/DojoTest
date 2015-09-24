@@ -63,6 +63,10 @@ function asignaActividad(){
 }
 
 function mueveNaruto(orientacion){
+	if(orientacion == 32){
+		posicion_Inicial_Naruto["url"] = 'resources/sprites/naruto/transformar.png'; 
+		pintadoConstante();
+	}else{
 		if(orientacion == 37){
 			posicion_Inicial_Naruto["x"] = posicion_Inicial_Naruto["x"]-10;
 			posicion_Inicial_Naruto["url"] = 'resources/sprites/naruto/narutoIzquierda.png';
@@ -74,8 +78,7 @@ function mueveNaruto(orientacion){
 		}else if(orientacion == 40){
 			posicion_Inicial_Naruto["y"] = posicion_Inicial_Naruto["y"]+10;
 		}
-		else if(orientacion == 32){
-			posicion_Inicial_Naruto["url"] = 'resources/sprites/naruto/transformar.png';
-		}
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		pintadoConstante();
+	}
 }

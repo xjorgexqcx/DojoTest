@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pe.com.dojoLearning.beans.Persona;
@@ -27,7 +28,6 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 @Controller
 public class HomeController {
-
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
 
@@ -56,10 +56,11 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/", method = { RequestMethod.POST,
-			RequestMethod.GET })	
+			RequestMethod.GET })
 	public String servicio() {
 		return "restTest";
 	}
+
 	@RequestMapping(value = "/index", method = { RequestMethod.POST,
 			RequestMethod.GET })
 	public String index() {
@@ -74,13 +75,34 @@ public class HomeController {
 		Persona p = new Persona("Jorge", "Quijano", "SA-1");
 		List<Persona> ltaPersonas = new ArrayList<Persona>();
 		ltaPersonas.add(p);
-		
+
 		p = new Persona("Juan", "Juarez", "SA-1");
 		ltaPersonas.add(p);
-		
+
 		p = new Persona("Coco", "Quijano", "SN-2");
 		ltaPersonas.add(p);
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(ltaPersonas);
+	}
+
+	@RequestMapping(value = "/nuevoCanvas")
+	public String getMove() {
+		return "nuevoCanvas";
+	}
+
+	@RequestMapping(value = "seguridad")
+	public String intentoDeCaptcha() {
+		return "IntentoCaptcha";
+	}
+	
+	@RequestMapping(value = "busqueda")
+	public String seguridad(Model model,@RequestParam("g-recaptcha-response") String captcha,@RequestParam("nombre") String nombre) {
+		 if(captcha.length()<=0){
+			 model.addAttribute("info","Lo sentimos, Verifique el captcha porfavor");
+		 }
+		 else{
+			 model.addAttribute("info","Ahora si se hizo click: "+captcha);
+		 }
+		return "IntentoCaptcha";
 	}
 }
